@@ -190,12 +190,12 @@
 -dontwarn com.google.android.exoplayer2.**
 
 # 实体类
-#-keep class com.github.tvbox.osc.bean.** { *; }
+#-keep class com.charlee.joymovie.bean.** { *; }
 #CardView
--keep class com.github.tvbox.osc.ui.tv.widget.card.**{*;}
+-keep class com.charlee.joymovie.ui.tv.widget.card.**{*;}
 #ViewObj
--keep class com.github.tvbox.osc.ui.tv.widget.ViewObj{
+-keep class com.charlee.joymovie.ui.tv.widget.ViewObj{
     <methods>;
 }
 
--keep class com.github.catvod.crawler.*{*;}
+-keep class com.charlee.catvod.crawler.*{*;}
