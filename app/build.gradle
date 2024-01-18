@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'kotlin-kapt'
+
 
 android {
     compileSdkVersion 30
@@ -6,7 +9,7 @@ android {
     defaultConfig {
         applicationId 'com.github.tvbox.osc'
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 30
         versionCode 1
         versionName '1.0.0'
         multiDexEnabled true
