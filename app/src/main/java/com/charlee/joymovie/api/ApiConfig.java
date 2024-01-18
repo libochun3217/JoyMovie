@@ -5,8 +5,9 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Base64;
 
-import com.charlee.catvod.crawler.JarLoader;
-import com.charlee.catvod.crawler.Spider;
+import com.blankj.utilcode.util.LogUtils;
+import com.github.catvod.crawler.JarLoader;
+import com.github.catvod.crawler.Spider;
 import com.charlee.joymovie.base.App;
 import com.charlee.joymovie.bean.LiveChannelGroup;
 import com.charlee.joymovie.bean.IJKCode;
@@ -39,6 +40,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * @author pj567
@@ -46,6 +48,7 @@ import java.util.Map;
  * @description:
  */
 public class ApiConfig {
+    private static String TAG = "ApiConfig";
     private static ApiConfig instance;
     private LinkedHashMap<String, SourceBean> sourceBeanList;
     private SourceBean mHomeSource;
@@ -79,6 +82,7 @@ public class ApiConfig {
     }
 
     public void loadConfig(boolean useCache, LoadConfigCallback callback, Activity activity) {
+        LogUtils.dTag(TAG, "loadConfig useCache " + useCache);
         String apiUrl = Hawk.get(HawkConfig.API_URL, "");
         if (apiUrl.isEmpty()) {
             callback.error("-1");
@@ -86,9 +90,11 @@ public class ApiConfig {
         }
         File cache = new File(App.getInstance().getFilesDir().getAbsolutePath() + "/" + MD5.encode(apiUrl));
         if (useCache && cache.exists()) {
+            LogUtils.dTag(TAG, "loadConfig useCache");
             try {
                 parseJson(apiUrl, cache);
                 callback.success();
+                LogUtils.dTag(TAG, "parseJson end");
                 return;
             } catch (Throwable th) {
                 th.printStackTrace();
@@ -164,6 +170,7 @@ public class ApiConfig {
 
         if (!md5.isEmpty() || useCache) {
             if (cache.exists() && (useCache || MD5.getFileMd5(cache).equalsIgnoreCase(md5))) {
+                LogUtils.dTag(TAG, "loadJar useCache");
                 if (jarLoader.load(cache.getAbsolutePath())) {
                     callback.success();
                 } else {
@@ -306,7 +313,7 @@ public class ApiConfig {
                 liveChannelGroup.setGroupName(url);
                 liveChannelGroupList.add(liveChannelGroup);
             } else {
-                loadLives(infoJson.get("lives").getAsJsonArray());
+//                loadLives(infoJson.get("lives").getAsJsonArray());
             }
         } catch (Throwable th) {
             th.printStackTrace();

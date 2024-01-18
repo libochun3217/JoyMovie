@@ -22,6 +22,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.charlee.joymovie.R;
 import com.charlee.joymovie.api.ApiConfig;
 import com.charlee.joymovie.base.BaseActivity;
@@ -61,6 +62,7 @@ import java.util.List;
 import me.jessyan.autosize.utils.AutoSizeUtils;
 
 public class HomeActivity extends BaseActivity {
+    private String TAG = "Homepage";
     private LinearLayout topLayout;
     private LinearLayout contentLayout;
     private TextView tvDate;
@@ -94,7 +96,7 @@ public class HomeActivity extends BaseActivity {
         return R.layout.activity_home;
     }
 
-    boolean useCacheConfig = false;
+    boolean useCacheConfig = true;
 
     @Override
     protected void init() {
@@ -105,11 +107,10 @@ public class HomeActivity extends BaseActivity {
         ControlManager.get().startServer();
         initView();
         initViewModel();
-        useCacheConfig = false;
         Intent intent = getIntent();
         if (intent != null && intent.getExtras() != null) {
             Bundle bundle = intent.getExtras();
-            useCacheConfig = bundle.getBoolean("useCache", false);
+            useCacheConfig = bundle.getBoolean("useCache", true);
         }
         initData();
     }
@@ -204,6 +205,7 @@ public class HomeActivity extends BaseActivity {
     private boolean jarInitOk = false;
 
     private void initData() {
+        LogUtils.dTag(TAG, "initData");
         if (dataInitOk && jarInitOk) {
             showLoading();
             sourceViewModel.getSort(ApiConfig.get().getHomeSourceBean().getKey());

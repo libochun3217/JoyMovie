@@ -2,6 +2,7 @@ package com.charlee.joymovie.base;
 
 import androidx.multidex.MultiDexApplication;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.charlee.joymovie.callback.EmptyCallback;
 import com.charlee.joymovie.callback.LoadingCallback;
 import com.charlee.joymovie.data.AppDataManager;
@@ -44,6 +45,7 @@ public class App extends MultiDexApplication {
                 .setSupportSP(false)
                 .setSupportSubunits(Subunits.MM);
         PlayerHelper.init();
+        LogUtils.getConfig().setBorderSwitch(false).setLogHeadSwitch(false);
     }
 
     private void initParams() {

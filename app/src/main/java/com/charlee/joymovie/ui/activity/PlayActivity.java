@@ -34,7 +34,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.charlee.catvod.crawler.Spider;
+import com.github.catvod.crawler.Spider;
 import com.charlee.joymovie.R;
 import com.charlee.joymovie.api.ApiConfig;
 import com.charlee.joymovie.base.BaseActivity;

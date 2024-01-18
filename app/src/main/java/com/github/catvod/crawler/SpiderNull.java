@@ -1,4 +1,4 @@
-package com.charlee.catvod.crawler;
+package com.github.catvod.crawler;
 
 public class SpiderNull extends Spider {
 }

@@ -1,4 +1,4 @@
-package com.charlee.catvod.crawler;
+package com.github.catvod.crawler;
 
 public class SpiderDebug {
     public static void log(Throwable th) {

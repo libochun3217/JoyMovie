@@ -1,4 +1,4 @@
-package com.charlee.catvod.crawler;
+package com.github.catvod.crawler;
 
 import android.content.Context;
 
@@ -19,6 +19,7 @@ public class JarLoader {
     private DexClassLoader classLoader = null;
     private ConcurrentHashMap<String, Spider> spiders = new ConcurrentHashMap<>();
     private Method proxyFun = null;
+    private static String TAG = "JarLoader";
 
     /**
      * 不要在主线程调用我

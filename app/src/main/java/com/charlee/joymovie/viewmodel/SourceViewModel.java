@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.charlee.catvod.crawler.Spider;
+import com.github.catvod.crawler.Spider;
 import com.charlee.joymovie.api.ApiConfig;
 import com.charlee.joymovie.base.App;
 import com.charlee.joymovie.bean.AbsJson;

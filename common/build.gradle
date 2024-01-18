@@ -34,8 +34,9 @@ android {
 }
 
 dependencies {
-
     api root.dependencies.core_ktx
     api root.dependencies.appcompat
     api root.dependencies.design
+
+    api 'com.blankj:utilcodex:1.31.0'
 }
