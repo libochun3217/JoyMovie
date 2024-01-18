@@ -1,17 +1,19 @@
-apply plugin: 'com.android.application'
-apply plugin: 'org.jetbrains.kotlin.android'
-apply plugin: 'kotlin-kapt'
-
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+def root = rootProject.ext
 
 android {
-    compileSdk 31
+    compileSdk root.android.compileSdkVersion
 
     defaultConfig {
-        applicationId 'com.charlee.joymovie'
-        minSdkVersion 16
-        targetSdkVersion 31
-        versionCode 1
-        versionName '1.0.0'
+        applicationId root.applicationId.app
+        minSdk root.android.minSdkVersion
+        targetSdk root.android.targetSdkVersion
+        versionCode root.android.versionCode
+        versionName root.android.versionName
         multiDexEnabled true
     }
 
@@ -58,6 +60,7 @@ android {
 dependencies {
     api fileTree(dir: "libs", include: ["*.jar"])
 
+    implementation project(":common")
 
     implementation 'org.nanohttpd:nanohttpd:2.3.1'
     implementation 'com.google.zxing:core:3.4.1'

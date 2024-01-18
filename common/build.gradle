@@ -1,20 +1,21 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
+def root = rootProject.ext
+
 android {
-    namespace 'com.joymovie.common'
-    compileSdk 31
+    compileSdk root.android.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.joymovie.common"
-        minSdk 16
-        targetSdk 31
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        minSdk root.android.minSdkVersion
+        targetSdk root.android.targetSdkVersion
+        versionCode root.android.versionCode
+        versionName root.android.versionName
+        testInstrumentationRunner root.android.testInstrumentationRunner
+        consumerProguardFiles root.android.consumerProguardFiles
     }
 
     buildTypes {
@@ -34,10 +35,7 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    api root.dependencies.core_ktx
+    api root.dependencies.appcompat
+    api root.dependencies.design
 }

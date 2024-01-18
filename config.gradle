@@ -1,0 +1,137 @@
+/**
+ * 全局统一配置
+ */
+ext {
+    // 组件化: 集成模式和单module运行模式切换标识
+    isModule = false
+
+    android = [
+            // 编译 SDK 版本
+            compileSdkVersion        : 31,
+            // 最低兼容 Android 版本
+            minSdkVersion            : 16,
+            // 最高兼容 Android 版本
+            targetSdkVersion         : 31,
+            // 当前版本编号
+            versionCode              : VERSION_CODE.toInteger(),
+            // 当前版本信息
+            versionName              : "${VERSION_NAME}",
+            // JUNIT测试模块
+            testInstrumentationRunner: "androidx.test.runner.AndroidJUnitRunner",
+            // 混淆配置 lib
+            consumerProguardFiles    : "consumer-rules.pro"
+    ]
+
+    applicationId = [
+            app      : "com.charlee.joymovie",
+    ]
+    // 开源库版本统一管理
+    versions = [
+            junitVersion                     : "4.13.2",
+            testJunitVersion                 : "1.1.3",
+            espressoVersion                  : "3.4.0",
+
+            coreKtxVersion                   : "1.7.0",
+            appcompatVersion                 : "1.4.1",
+            designVersion                    : "1.4.0",
+            constraintlayoutVersion          : "2.1.3",
+
+            navigationFragmentVersion        : "2.4.1",
+            navigationUiVersion              : "2.4.1",
+            activityKtxVersion               : "1.4.0",
+            fragmentKtxVersion               : "1.4.0",
+
+            arouterApiVersion                : "1.5.2",
+            arouterCompilerVersion           : "1.5.2",
+            arouterAnnotationVersion         : "1.0.6",
+
+            okhttpVersion                    : "4.9.0",
+            retrofitVersion                  : "2.9.0",
+            lifecycleVersion                 : "2.5.1",
+            coroutinesVersion                : "1.5.2",
+            recyclerViewAdapterVersion       : "3.0.8",
+            cameraVersion                    : "1.2.0-alpha04",
+            zxingVersion                     : "3.4.1",
+            jpush                            : "5.0.4",
+            gsonVersion                      : "2.8.6",
+    ]
+
+    dependencies = [
+            "appcompat"                    : "androidx.appcompat:appcompat:${versions["appcompatVersion"]}",
+            "constraintlayout"             : "androidx.constraintlayout:constraintlayout:${versions["constraintlayoutVersion"]}",
+            "espresso_core"                : "androidx.test.espresso:espresso-core:${versions["espressoVersion"]}",
+            "junit"                        : "junit:junit:${versions["junitVersion"]}",
+            "testJunit"                    : "androidx.test.ext:junit:${versions["testJunitVersion"]}",
+
+            "core_ktx"                     : "androidx.core:core-ktx:${versions["coreKtxVersion"]}",
+            "design"                       : "com.google.android.material:material:${versions["designVersion"]}",
+
+            "navigation_fragment"          : "androidx.navigation:navigation-fragment-ktx:${versions["navigationFragmentVersion"]}",
+            "navigation_ui"                : "androidx.navigation:navigation-ui-ktx:${versions["navigationUiVersion"]}",
+            "activity_ktx"                 : "androidx.activity:activity-ktx:${versions["activityKtxVersion"]}",
+            "fragment_ktx"                 : "androidx.fragment:fragment-ktx:${versions["fragmentKtxVersion"]}",
+
+            // 阿里ARouter
+            "arouter_api"                  : "com.alibaba:arouter-api:${versions["arouterApiVersion"]}",
+            "arouter_compiler"             : "com.alibaba:arouter-compiler:${versions["arouterCompilerVersion"]}",
+            "arouter_annotation"           : "com.alibaba:arouter-annotation:${versions["arouterAnnotationVersion"]}",
+
+            // network
+            "retrofit"                     : "com.squareup.retrofit2:retrofit:${versions["retrofitVersion"]}",
+            "retrofit_gson"                : "com.squareup.retrofit2:converter-gson:${versions["retrofitVersion"]}",
+            "retrofit_scalars"             : "com.squareup.retrofit2:converter-scalars:${versions["retrofitVersion"]}",
+            "okhttp"                       : "com.squareup.okhttp3:okhttp:${versions["okhttpVersion"]}",
+            "google_gson"                  : "com.google.code.gson:gson:${versions["gsonVersion"]}",
+
+            // coroutines
+            "coroutines_android"           : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions["coroutinesVersion"]}",
+            "coroutines_core"              : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions["coroutinesVersion"]}",
+            "livedata_ktx"                 : "androidx.lifecycle:lifecycle-livedata-ktx:${versions["lifecycleVersion"]}",
+            "viewmodel_ktx"                : "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions["lifecycleVersion"]}",
+
+            "recyclerViewAdapterHelper"    : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${versions["recyclerViewAdapterVersion"]}",
+
+            // scan code
+            "camera2"                      : "androidx.camera:camera-camera2:${versions["cameraVersion"]}",
+            "cameraLifecycle"              : "androidx.camera:camera-lifecycle:${versions["cameraVersion"]}",
+            "cameraView"                   : "androidx.camera:camera-view:${versions["cameraVersion"]}",
+            "cameraVideo"                  : "androidx.camera:camera-video:${versions["cameraVersion"]}",
+            "zxing"                        : "com.google.zxing:core:${versions["zxingVersion"]}",
+
+            // push
+            "jpush"                        : "cn.jiguang.sdk:jpush:${versions["jpush"]}",
+            "HWPush"                       : "cn.jiguang.sdk.plugin:huawei:${versions["jpush"]}",
+            "MiPush"                       : "cn.jiguang.sdk.plugin:xiaomi:${versions["jpush"]}",
+            "OppoPush"                     : "cn.jiguang.sdk.plugin:oppo:${versions["jpush"]}",
+            "VivoPush"                     : "cn.jiguang.sdk.plugin:vivo:${versions["jpush"]}",
+            "HonorPush"                    : "cn.jiguang.sdk.plugin:honor:${versions["jpush"]}"
+    ]
+
+    getGitCommit = {
+        def gitDir = file("${file("${rootDir}")}/.git")
+        if (!gitDir.isDirectory()) {
+            return 'non-git-build'
+        }
+
+        def cmd = 'git log --pretty=format:%h -1'
+        def gitCommit = cmd.execute().text.trim()
+        assert !gitCommit.isEmpty()
+        gitCommit
+    }
+
+    getGitBranch = {
+        def gitBranch = 'git symbolic-ref --short -q HEAD'.execute().text.trim()
+        println "gitBranch from symbolic:$gitBranch"
+
+        if (gitBranch.isEmpty()) {
+            gitBranch = "$System.env.GIT_BRANCH"
+            println "gitBranch from env:$gitBranch"
+        }
+
+        return gitBranch
+    }
+
+    getReleaseTime = {
+        return new Date().format("yyyy-MM-dd HH:mm:ss", TimeZone.getTimeZone("GMT+08:00"))
+    }
+}
